@@ -3,14 +3,13 @@ using RepositoryDesignPatternSession07.Models.Services.Contracts.RepositoryFrame
 
 namespace RepositoryDesignPatternSession07.Models.Services.Contracts
 {
-    public interface IProductRepository 
-    {
-
-        Task<List<Product>> Select();
-        //Person SelectById(Guid Id);
-        //void Insert(Person person);
-        //void Update(Person person);
-        //void Delete(Guid Id);
-    }
-
+        // It now inherits all the methods from IRepository for the 'Product' entity
+        public interface IProductRepository : IRepository<Product>
+        {
+            // You only add methods here that are SPECIFIC to products.
+            // For example:
+            // List<Product> GetProductsByCategory(int categoryId);
+            // Product GetProductByName(string name);
+        }
+        
 }

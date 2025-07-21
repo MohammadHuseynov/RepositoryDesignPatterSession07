@@ -1,14 +1,22 @@
-﻿namespace RepositoryDesignPatternSession07.Models.Services.Contracts.RepositoryFrameworks
+﻿using System.Collections.Generic;
+namespace RepositoryDesignPatternSession07.Models.Services.Contracts.RepositoryFrameworks
 {
-    public interface IRepository<T>
+    public interface IRepository<TEntity> where TEntity : class
     {
-        IEnumerable<T> Select();
-        T SelectById(Guid Id);
-        void Insert(T obj);
-        void Update(T obj);
-        void Update(Guid Id, string values);
-        void Delete(object? Id);
-        void Delete(T obj);
-        void Save();
+        // CREATE
+        void Add(TEntity entity);
+
+        // READ
+        TEntity GetById(object id);
+        List<TEntity> GetAll();
+
+        // UPDATE
+        void Update(TEntity entity);
+
+        // DELETE
+        void Delete(TEntity entity);
+
+        // PERSISTENCE
+        void SaveChanges();
     }
 }

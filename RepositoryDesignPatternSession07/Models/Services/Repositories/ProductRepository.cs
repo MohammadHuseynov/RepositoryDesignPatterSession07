@@ -14,30 +14,34 @@ namespace RepositoryDesignPatternSession07.Models.Services.Repositories
           _context = context;
       }
 
-       
-
-        public async Task<List<Product>> Select()
+      public void Add(Product product)
       {
-          using (_context)
-          {
-              try
-              {
-
-                  var products = await _context.Product.ToListAsync();
-                  return products;
-              }
-              catch (Exception)
-              {
-
-                  throw;
-              }
-              finally
-              {
-                  if (_context.Product != null) _context.Dispose();
-              }
-          }
+          _context.Product.Add(product);
       }
 
-      
+      public void Delete(Product product)
+      {
+          _context.Product.Remove(product);
+      }
+
+      public List<Product> GetAll()
+      {
+          return _context.Product.ToList();
+      }
+
+      public Product GetById(object id)
+      {
+          return _context.Product.Find(id);
+      }
+
+      public void Update(Product product)
+      {
+          _context.Product.Update(product);
+      }
+
+      public void SaveChanges()
+      {
+          _context.SaveChanges();
+      }
     }
 }

@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using RepositoryDesignPatternSession07.ApplicationServices.Services;
+using RepositoryDesignPatternSession07.ApplicationServices.Services.Contracts;
 using RepositoryDesignPatternSession07.Models;
 using RepositoryDesignPatternSession07.Models.Services.Contracts;
 using RepositoryDesignPatternSession07.Models.Services.Repositories;
@@ -11,8 +13,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RepositoryDesignPatternSession07DbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("Default")
 ));
+
+// This tells ASP.NET: "When a class asks for IProductRepository, create a ProductRepository."
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
+// This tells ASP.NET: "When a class asks for IProductApplicationService, create a ProductApplicationService."
+builder.Services.AddScoped<IProductApplicationService, ProductApplicationService>();
 
 var app = builder.Build();
 
